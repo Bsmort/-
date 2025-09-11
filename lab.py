@@ -10,7 +10,8 @@ def sum_of_two(nums: list, target: int) -> list:
         if step == 1:
             break
     return result 
-print(sum_of_two([2, 7, 11, 15], 9)) 
-print(sum_of_two([3, 2, 4], 6))
-print(sum_of_two([3, 3], 6))
+#print(sum_of_two([2, 7, 11, 15], 9)) 
+#print(sum_of_two([3, 2, 4], 6))
+#print(sum_of_two([3, 3], 6))
+
     
