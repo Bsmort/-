@@ -18,3 +18,10 @@ def test_sum_of_two_ex3():
   target = 6
   expected = [0, 1]
   assert sum_of_two(nums, target) == expected
+
+def test_sum_of_two_ex4():
+  nums = [0, 3, 0, 0]
+  target = 0
+  expected = [0, 2]
+  assert sum_of_two(nums, target) == expected
+
