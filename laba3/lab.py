@@ -3,16 +3,16 @@ import unittest
 from typing import List, Tuple
 
 #параметры по умолчанию
-par_height = 1
-par_root = 1
+par_height = 4
+par_root = 4
 
 #функция вычисления левого потомка
 def left_branch(root:int) -> int:
-    return root * 2
+    return root * 4
 
 #функция вычисления правого потомка
 def right_branch(root:int) -> int:
-    return root + 3
+    return root + 1
 
 def gen_bin_tree(height:int, root:int) -> dict:
     """
@@ -90,7 +90,7 @@ class TestMath(unittest.TestCase):
     def test_default_tree(self):
         result = gen_bin_tree(par_height, par_root)
         self.assertIn("root", result)
-        self.assertEqual(result["root"], 1)
+        self.assertEqual(result["root"], 4)
 
     def test_tree_structure_height_2(self):
         """Тест структуры дерева высотой 2"""
@@ -103,13 +103,13 @@ class TestMath(unittest.TestCase):
         
         # Проверяем левого потомка (1 * 2 = 2)
         left_subtree = tree["left_leaf"]
-        self.assertEqual(left_subtree["root"], 2)
+        self.assertEqual(left_subtree["root"], 4)
         self.assertNotIn("left_leaf", left_subtree)  # Лист, высота 1
         self.assertNotIn("right_leaf", left_subtree)
         
         # Проверяем правого потомка (1 + 3 = 4)
         right_subtree = tree["right_leaf"]
-        self.assertEqual(right_subtree["root"], 4)
+        self.assertEqual(right_subtree["root"], 2)
         self.assertNotIn("left_leaf", right_subtree)  # Лист, высота 1
         self.assertNotIn("right_leaf", right_subtree)
     
@@ -122,10 +122,10 @@ class TestMath(unittest.TestCase):
         
         # Проверяем структуру левого поддерева
         left_subtree = tree["left_leaf"]
-        self.assertEqual(left_subtree["root"], 2)  # 1 * 2
+        self.assertEqual(left_subtree["root"], 4)  # 1 * 2
         
         # Левый потомок узла 2
-        self.assertEqual(left_subtree["left_leaf"]["root"], 4)  # 2 * 2
+        self.assertEqual(left_subtree["left_leaf"]["root"], 16)  # 4 * 4
         self.assertNotIn("left_leaf", left_subtree["left_leaf"])
         self.assertNotIn("right_leaf", left_subtree["left_leaf"])
         
@@ -136,13 +136,13 @@ class TestMath(unittest.TestCase):
         
         # Проверяем структуру правого поддерева
         right_subtree = tree["right_leaf"]
-        self.assertEqual(right_subtree["root"], 4)  # 1 + 3
+        self.assertEqual(right_subtree["root"], 2)  # 1 + 1
         
         # Левый потомок узла 4
         self.assertEqual(right_subtree["left_leaf"]["root"], 8)  # 4 * 2
         
         # Правый потомок узла 4
-        self.assertEqual(right_subtree["right_leaf"]["root"], 7)  # 4 + 3
+        self.assertEqual(right_subtree["right_leaf"]["root"], 3)  # 
     
     def test_count_nodes_function(self):
         """Тест функции подсчета узлов"""
@@ -174,8 +174,8 @@ class TestMath(unittest.TestCase):
         # Большое значение корня
         tree_large = gen_bin_tree(2, 1000)
         self.assertEqual(tree_large["root"], 1000)
-        self.assertEqual(tree_large["left_leaf"]["root"], 2000)  # 1000 * 2
-        self.assertEqual(tree_large["right_leaf"]["root"], 1003)  # 1000 + 3
+        self.assertEqual(tree_large["left_leaf"]["root"], 4000)  # 1000 * 4
+        self.assertEqual(tree_large["right_leaf"]["root"], 1001)  # 1000 + 1
 
 # Запуск тестов
 if __name__ == '__main__':
