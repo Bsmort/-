@@ -1,0 +1,212 @@
+1. Логирование в stdout:
+[2026-02-11 19:16:47] INFO: Function 'get_currencies_decorated' called with args: (['USD', 'EUR'])
+[2026-02-11 19:16:47] INFO: Function 'get_currencies_decorated' returned: {'USD': 77.4648, 'EUR': 92.475}
+Результат: {'USD': 77.4648, 'EUR': 92.475}
+
+2. Логирование в StringIO:
+Логи из StringIO:
+[2026-02-11 19:16:48] INFO: Function 'multiply' called with args: (5, 3)
+[2026-02-11 19:16:48] INFO: Function 'multiply' returned: 15
+
+
+1. Квадратное уравнение с двумя корнями:
+[2026-02-11 19:16:48] INFO: Function 'demo_solve_quadratic' called with args: (1, -5, 6)
+Корни уравнения: x1 = 3.0, x2 = 2.0
+[2026-02-11 19:16:48] INFO: Function 'demo_solve_quadratic' returned: None
+
+2. Уравнение с одним корнем:
+[2026-02-11 19:16:48] INFO: Function 'demo_solve_quadratic' called with args: (1, -4, 4)
+Корень уравнения: x = 2.0
+[2026-02-11 19:16:48] INFO: Function 'demo_solve_quadratic' returned: None
+
+3. Уравнение без корней:
+[2026-02-11 19:16:48] INFO: Function 'demo_solve_quadratic' called with args: (1, 2, 5)
+WARNING:root:Discriminant < 0: no real roots
+Уравнение не имеет действительных корней
+[2026-02-11 19:16:48] INFO: Function 'demo_solve_quadratic' returned: None
+test_connection_error (__main__.TestGetCurrencies.test_connection_error)
+Тест ошибки подключения к API. ... ok
+test_invalid_currency (__main__.TestGetCurrencies.test_invalid_currency)
+Тест запроса несуществующей валюты. ... FAIL
+test_invalid_json (__main__.TestGetCurrencies.test_invalid_json)
+Тест обработки некорректного JSON. ... ERROR
+test_missing_valute_key (__main__.TestGetCurrencies.test_missing_valute_key)
+Тест отсутствия ключа 'Valute' в ответе. ... ERROR
+test_successful_request (__main__.TestGetCurrencies.test_successful_request)
+Тест успешного получения курсов валют. ... ok
+test_error_execution_logging (__main__.TestLoggerDecorator.test_error_execution_logging)
+Тест логирования при возникновении ошибки. ... FAIL
+test_logger_with_logging_module (__main__.TestLoggerDecorator.test_logger_with_logging_module)
+Тест логирования через модуль logging. ... INFO:test_logger:Function 'multiply' called with args: (4, 5)
+INFO:test_logger:Function 'multiply' returned: 20
+FAIL
+test_logging_with_args_and_kwargs (__main__.TestLoggerDecorator.test_logging_with_args_and_kwargs)
+Тест логирования различных типов аргументов. ... FAIL
+test_preserve_function_metadata (__main__.TestLoggerDecorator.test_preserve_function_metadata)
+Тест сохранения метаданных функции. ... ok
+test_successful_execution_logging (__main__.TestLoggerDecorator.test_successful_execution_logging)
+Тест логирования при успешном выполнении. ... FAIL
+test_infinite_solutions (__main__.TestQuadraticEquation.test_infinite_solutions)
+Тест бесконечного количества решений. ... ERROR:root:Coefficient 'a' cannot be zero
+ERROR
+test_invalid_input (__main__.TestQuadraticEquation.test_invalid_input)
+Тест некорректных входных данных. ... CRITICAL:root:Parameter 'a' must be a number, got: abc
+ERROR
+test_linear_equation (__main__.TestQuadraticEquation.test_linear_equation)
+Тест линейного уравнения (a=0). ... ERROR:root:Coefficient 'a' cannot be zero
+ERROR
+test_no_roots (__main__.TestQuadraticEquation.test_no_roots)
+Тест без действительных корней. ... WARNING:root:Discriminant < 0: no real roots
+ok
+test_one_root (__main__.TestQuadraticEquation.test_one_root)
+Тест с одним корнем. ... FAIL
+test_two_roots (__main__.TestQuadraticEquation.test_two_roots)
+Тест с двумя корнями. ... ok
+test_logging_error (__main__.TestStreamWrite.test_logging_error)
+Тест логирования ошибки подключения к API. ... FAIL
+
+======================================================================
+ERROR: test_invalid_json (__main__.TestGetCurrencies.test_invalid_json)
+Тест обработки некорректного JSON.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 92, in get_currencies
+    response = requests.get(url, timeout=10)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/requests/sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/requests/sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "/usr/local/lib/python3.12/dist-packages/requests/models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "/usr/local/lib/python3.12/dist-packages/requests/models.py", line 438, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL 'некорректныйJSON': No scheme supplied. Perhaps you meant https://некорректныйJSON?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 205, in test_invalid_json
+    get_currencies(['USD'], url="некорректныйJSON")
+  File "/tmp/ipython-input-210483753.py", line 95, in get_currencies
+    raise ConnectionError(f"API недоступен: {str(e)}")
+ConnectionError: API недоступен: Invalid URL 'некорректныйJSON': No scheme supplied. Perhaps you meant https://некорректныйJSON?
+
+======================================================================
+ERROR: test_missing_valute_key (__main__.TestGetCurrencies.test_missing_valute_key)
+Тест отсутствия ключа 'Valute' в ответе.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 218, in test_missing_valute_key
+    original_urlopen = request.urlopen
+                       ^^^^^^^
+NameError: name 'request' is not defined. Did you mean: 'requests'?
+
+======================================================================
+ERROR: test_infinite_solutions (__main__.TestQuadraticEquation.test_infinite_solutions)
+Тест бесконечного количества решений.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 336, in test_infinite_solutions
+    solve_quadratic(0, 0, 5)
+  File "/tmp/ipython-input-210483753.py", line 145, in solve_quadratic
+    raise ValueError("a cannot be zero")
+ValueError: a cannot be zero
+
+======================================================================
+ERROR: test_invalid_input (__main__.TestQuadraticEquation.test_invalid_input)
+Тест некорректных входных данных.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 332, in test_invalid_input
+    solve_quadratic("abc", 2, 3)
+  File "/tmp/ipython-input-210483753.py", line 141, in solve_quadratic
+    raise TypeError(f"Coefficient '{name}' must be numeric")
+TypeError: Coefficient 'a' must be numeric
+
+======================================================================
+ERROR: test_linear_equation (__main__.TestQuadraticEquation.test_linear_equation)
+Тест линейного уравнения (a=0).
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 327, in test_linear_equation
+    result = solve_quadratic(0, 2, -6)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ipython-input-210483753.py", line 145, in solve_quadratic
+    raise ValueError("a cannot be zero")
+ValueError: a cannot be zero
+
+======================================================================
+FAIL: test_invalid_currency (__main__.TestGetCurrencies.test_invalid_currency)
+Тест запроса несуществующей валюты.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 197, in test_invalid_currency
+    self.assertIn('не найдена', str(context.exception))
+AssertionError: 'не найдена' not found in '"Валюта \'XXX\' отсутствует в данных API"'
+
+======================================================================
+FAIL: test_error_execution_logging (__main__.TestLoggerDecorator.test_error_execution_logging)
+Тест логирования при возникновении ошибки.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 250, in test_error_execution_logging
+    self.assertIn("ERROR: divide вызвала исключение ZeroDivisionError", logs)
+AssertionError: 'ERROR: divide вызвала исключение ZeroDivisionError' not found in "[2026-02-11 19:16:49] INFO: Function 'divide' called with args: (5, 0)\n[2026-02-11 19:16:49] ERROR: Function 'divide' raised ZeroDivisionError: division by zero\n"
+
+======================================================================
+FAIL: test_logger_with_logging_module (__main__.TestLoggerDecorator.test_logger_with_logging_module)
+Тест логирования через модуль logging.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 266, in test_logger_with_logging_module
+    self.assertIn("INFO: Вызов функции: multiply(4, 5)", logs)
+AssertionError: 'INFO: Вызов функции: multiply(4, 5)' not found in "INFO: Function 'multiply' called with args: (4, 5)\nINFO: Function 'multiply' returned: 20\n"
+
+======================================================================
+FAIL: test_logging_with_args_and_kwargs (__main__.TestLoggerDecorator.test_logging_with_args_and_kwargs)
+Тест логирования различных типов аргументов.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 285, in test_logging_with_args_and_kwargs
+    self.assertIn("Вызов функции: complex_func(5, 30, b=20, extra='test')", logs)
+AssertionError: "Вызов функции: complex_func(5, 30, b=20, extra='test')" not found in "[2026-02-11 19:16:49] INFO: Function 'complex_func' called with args: (5, 20, 30, extra='test')\n[2026-02-11 19:16:49] INFO: Function 'complex_func' returned: 25\n"
+
+======================================================================
+FAIL: test_successful_execution_logging (__main__.TestLoggerDecorator.test_successful_execution_logging)
+Тест логирования при успешном выполнении.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 240, in test_successful_execution_logging
+    self.assertIn("INFO: Вызов функции: add(2, 3)", logs)
+AssertionError: 'INFO: Вызов функции: add(2, 3)' not found in "[2026-02-11 19:16:49] INFO: Function 'add' called with args: (2, 3)\n[2026-02-11 19:16:49] INFO: Function 'add' returned: 5\n"
+
+======================================================================
+FAIL: test_one_root (__main__.TestQuadraticEquation.test_one_root)
+Тест с одним корнем.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 320, in test_one_root
+    self.assertEqual(result, 2.0)
+AssertionError: (2.0,) != 2.0
+
+======================================================================
+FAIL: test_logging_error (__main__.TestStreamWrite.test_logging_error)
+Тест логирования ошибки подключения к API.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/ipython-input-210483753.py", line 307, in test_logging_error
+    self.assertIn("API ЦБ РФ недоступен", logs)
+AssertionError: 'API ЦБ РФ недоступен' not found in '[2026-02-11 19:16:49] INFO: Function \'wrapped\' called with args: ()\n[2026-02-11 19:16:49] ERROR: Function \'wrapped\' raised ConnectionError: API недоступен: HTTPSConnectionPool(host=\'invalid\', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x78881b35bfb0>: Failed to resolve \'invalid\' ([Errno -2] Name or service not known)"))\n'
+
+----------------------------------------------------------------------
+Ran 17 tests in 1.077s
+
+FAILED (failures=7, errors=5)
