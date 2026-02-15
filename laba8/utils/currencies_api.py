@@ -1,0 +1,1 @@
+# функция get_currencies
